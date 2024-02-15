@@ -52,7 +52,7 @@ if DATABASE_URL:
 
 UPSTREAM_REPO = environ.get('UPSTREAM_REPO', '')
 if len(UPSTREAM_REPO) == 0:
-    UPSTREAM_REPO = 'https://github.com/5hojib/Aeon'
+    UPSTREAM_REPO = 'https://Hrishi2861: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@github.com/Hrishi2861/Aeon-Modified'
 
 UPSTREAM_BRANCH = environ.get('UPSTREAM_BRANCH', '')
 if len(UPSTREAM_BRANCH) == 0:
