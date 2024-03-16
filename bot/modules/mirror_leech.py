@@ -7,7 +7,7 @@ from asyncio import sleep
 from aiofiles import open as aiopen
 from aiofiles.os import path as aiopath
 from cloudscraper import create_scraper
-
+import asyncio
 from bot import bot, LOGGER, config_dict, bot_name, user_data
 from bot.helper.ext_utils.bot_utils import is_url, is_magnet, is_mega_link, is_gdrive_link, get_content_type, new_task, sync_to_async, is_rclone_path, is_telegram_link, arg_parser, fetch_user_tds
 from bot.helper.ext_utils.exceptions import DirectDownloadLinkException
@@ -32,6 +32,9 @@ from bot.helper.ext_utils.aeon_utils import nsfw_precheck
 
 @new_task
 async def _mirror_leech(client, message, isQbit=False, isLeech=False, sameDir=None, bulk=[]):
+    sticker_message = await message.reply_sticker("CAACAgIAAxkBAAEXyPRledQ6luKt1QABSPMPi2s4rgH3xMUAAmkdAALpI4hJ8xCGgSybQv8zBA")
+    await asyncio.sleep(2)
+    await sticker_message.delete()
     text         = message.text.split('\n')
     input_list   = text[0].split(' ')
     arg_base     = {'link'    : '', 
