@@ -8,6 +8,7 @@ from uuid import uuid4
 from base64 import b64decode
 from quoters import Quote
 from html import escape
+import asyncio
 from cloudscraper import create_scraper
 import asyncio
 from requests import get as rget
@@ -35,6 +36,9 @@ from .helper.mirror_utils.gdrive_utils import count, delete, list, clone
 
 @new_thread
 async def stats(_, message):
+    sticker_message = await message.reply_sticker("CAACAgIAAxkBAAEYonplzwrczhVu3I6HqPBzro3L2JU6YAACvAUAAj-VzAoTSKpoG9FPRjQE")
+    await asyncio.sleep(2)
+    await sticker_message.delete()
     total, used, free, disk = disk_usage('/')
     memory = virtual_memory()
     currentTime = get_readable_time(time() - botStartTime)
@@ -42,22 +46,22 @@ async def stats(_, message):
     cpuUsage = cpu_percent(interval=0.5)
     quote = Quote.print().split('―', 1)[0].strip().replace("“", "").replace("”", "")
     limit_mapping = {
-        'Torrent'  : config_dict.get('TORRENT_LIMIT',  '∞'),
-        'Gdrive'   : config_dict.get('GDRIVE_LIMIT',   '∞'),
-        'Ytdlp'    : config_dict.get('YTDLP_LIMIT',    '∞'),
-        'Direct'   : config_dict.get('DIRECT_LIMIT',   '∞'),
-        'Leech'    : config_dict.get('LEECH_LIMIT',    '∞'),
-        'Clone'    : config_dict.get('CLONE_LIMIT',    '∞'),
-        'Mega'     : config_dict.get('MEGA_LIMIT',     '∞'),
-        'User task': config_dict.get('USER_MAX_TASKS', '∞')}
+        '🧲 Torrent'  : config_dict.get('TORRENT_LIMIT',  '∞'),
+        '🟢 Gdrive'   : config_dict.get('GDRIVE_LIMIT',   '∞'),
+        '🔴 Ytdlp'    : config_dict.get('YTDLP_LIMIT',    '∞'),
+        '🔗 Direct'   : config_dict.get('DIRECT_LIMIT',   '∞'),
+        '🚀 Leech'    : config_dict.get('LEECH_LIMIT',    '∞'),
+        '⚡️ Clone'     : config_dict.get('CLONE_LIMIT',    '∞'),
+        'Ⓜ️ Mega'     : config_dict.get('MEGA_LIMIT',     '∞'),
+        '👤 User task': config_dict.get('USER_MAX_TASKS', '∞')}
     system_info = f'<b>{quote}</b>\n\n'\
-        f'<code>• Bot uptime :</code> {currentTime}\n'\
-        f'<code>• Sys uptime :</code> {osUptime}\n'\
-        f'<code>• CPU usage  :</code> {cpuUsage}%\n'\
-        f'<code>• RAM usage  :</code> {memory.percent}%\n'\
-        f'<code>• Disk usage :</code> {disk}%\n'\
-        f'<code>• Free space :</code> {get_readable_file_size(free)}\n'\
-        f'<code>• Total space:</code> {get_readable_file_size(total)}\n\n'
+        f'<code>•🤖 Bot uptime :</code> {currentTime}\n'\
+        f'<code>•🖥️ Sys uptime :</code> {osUptime}\n'\
+        f'<code>•⚡️ CPU usage  :</code> {cpuUsage}%\n'\
+        f'<code>•🧨 RAM usage  :</code> {memory.percent}%\n'\
+        f'<code>•💿 Disk usage :</code> {disk}%\n'\
+        f'<code>•🪫 Free space :</code> {get_readable_file_size(free)}\n'\
+        f'<code>•💯 Total space:</code> {get_readable_file_size(total)}\n\n'\
             
     limitations = f'<b>LIMITATIONS</b>\n\n'
     
