@@ -9,7 +9,7 @@ from bot.helper.telegram_helper.filters import CustomFilters
 from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot.helper.telegram_helper.message_utils import sendMessage, deleteMessage, one_minute_del, sendStatusMessage, update_all_messages
 from bot.helper.ext_utils.bot_utils import get_readable_file_size, get_readable_time, turn_page, setInterval, new_task
-
+from bot.modules import images
 @new_task
 async def mirror_status(_, message):
     async with download_dict_lock:
@@ -25,11 +25,11 @@ async def mirror_status(_, message):
         msg += f"\n<b>• Bot uptime</b>: {currentTime}"
         msg += f"\n<b>• Free disk space</b>: {free}"
 
-        reply_message = await sendMessage(message, msg)
+        reply_message = await sendMessage(message, msg, photo='IMAGES')
         await deleteMessage(message)
         await one_minute_del(reply_message)
     else:
-        await sendStatusMessage(message)
+        await sendStatusMessage(message, photo='IMAGES')
         await deleteMessage(message)
         async with status_reply_dict_lock:
             if Interval:
