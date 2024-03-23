@@ -27,6 +27,7 @@ async def mirror_status(_, message):
         msg += '<b>Uninstall Telegram and enjoy your life!</b>\n\nNo downloads are currently in progress.\n'
         msg += f"\n<b>•🤖 Bot uptime</b>: {currentTime}"
         msg += f"\n<b>•💿 Free disk space</b>: {free}"
+        msg += "\n\n<a href='https://t.me/JetMirror'>𝑩𝒐𝒕 𝒃𝒚 🚀 𝑱𝒆𝒕-𝑴𝒊𝒓𝒓𝒐𝒓</a>\n\n"
 
         reply_message = await sendMessage(message, msg, photo='IMAGES')
         await deleteMessage(message)
