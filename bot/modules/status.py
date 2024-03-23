@@ -32,7 +32,7 @@ async def mirror_status(_, message):
         await deleteMessage(message)
         await one_minute_del(reply_message)
     else:
-        await sendStatusMessage(message, photo='IMAGES')
+        await sendStatusMessage(message)
         await deleteMessage(message)
         async with status_reply_dict_lock:
             if Interval:
