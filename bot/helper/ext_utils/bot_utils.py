@@ -14,7 +14,7 @@ from asyncio import create_subprocess_exec, create_subprocess_shell, run_corouti
 from asyncio.subprocess import PIPE
 from functools import partial, wraps
 from concurrent.futures import ThreadPoolExecutor
-from bot.modules import images
+#from bot.modules import images
 from aiohttp import ClientSession as aioClientSession
 from psutil import virtual_memory, cpu_percent, disk_usage
 from requests import get as rget
