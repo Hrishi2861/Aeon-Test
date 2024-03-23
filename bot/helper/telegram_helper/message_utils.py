@@ -263,7 +263,14 @@ async def update_all_messages(force=False):
                 status_reply_dict[chat_id][1] = time()
 
 
-async def sendStatusMessage(msg):
+async def sendStatusMessage(msg, text, photo=None):
+    if photo:
+            try:
+                if photo == 'IMAGES':
+                    photo = rchoice(config_dict['IMAGES'])
+                return await message.reply_photo(photo=photo, reply_to_message_id=message.id, caption=text, reply_markup=buttons, disable_notification=True)
+            except IndexError:
+                pass
     async with download_dict_lock:
         progress, buttons = await sync_to_async(get_readable_message)
     if progress is None:
