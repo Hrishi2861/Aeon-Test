@@ -177,10 +177,10 @@ def get_readable_message():
             msg += f"\n⌑ ᴅᴏɴᴇ: {download.processed_bytes()} of {download.size()}"
             msg += f"\n⌑ sᴘᴇᴇᴅ: {download.speed()}"
             msg += f'\n⌑ ᴇsᴛɪᴍᴀᴛᴇᴅ: {download.eta()}'
-            msg += f"\n⌑ ᴜsᴇʀ: {download.message.from_user.mention} \n⌑ ɪᴅ: <code>{download.message.from_user.id}</code>\n\n"
+            msg += f"\n⌑ ᴜsᴇʀ: {download.message.from_user.mention} \n⌑ ɪᴅ: <code>{download.message.from_user.id}</code>\n"
             if hasattr(download, 'seeders_num'):
                 try:
-                    msg += f"\n⌑ sᴇᴇᴅᴇʀs: {download.seeders_num()} | ʟᴇᴇᴄʜᴇʀs: {download.leechers_num()}"
+                    msg += f"⌑ sᴇᴇᴅᴇʀs: {download.seeders_num()} | ʟᴇᴇᴄʜᴇʀs: {download.leechers_num()}"
                 except:
                     pass
         elif download.status() == MirrorStatus.STATUS_SEEDING:
@@ -192,7 +192,7 @@ def get_readable_message():
         else:
             msg += f"\n⌑ sɪᴢᴇ: {download.size()}"
         msg += f"\n⌑ ᴇʟᴀᴘsᴇᴅ: {get_readable_time(time() - download.message.date.timestamp())}"
-        msg += f"\n⚠️/stop_{download.gid()[:8]}\n\n"
+        msg += f"\n⚠️ /stop_{download.gid()[:8]}\n\n"
     if len(msg) == 0:
         return None, None
     dl_speed = 0
@@ -207,15 +207,15 @@ def get_readable_message():
                 up_speed += text_to_bytes(download.upload_speed())
     if tasks > STATUS_LIMIT:
         buttons = ButtonMaker()
-        buttons.ibutton("Pʀᴇᴠ ➡️", "status pre")
-        buttons.ibutton(f"Rᴇғ 🔄 {PAGE_NO}/{PAGES}", "status ref")
-        buttons.ibutton("⬅️ Nᴇxᴛ", "status nex")
+        buttons.ibutton("ᴘʀᴇᴠ ➡️", "status pre")
+        buttons.ibutton(f"ʀᴇғ 🔄 {PAGE_NO}/{PAGES}", "status ref")
+        buttons.ibutton("⬅️ ɴᴇxᴛ", "status nex")
         button = buttons.build_menu(3)
     msg += f"<b>⌑ Tᴀsᴋs</b>: {tasks}{bmax_task}"
-    msg += f"\n<b>⌑ 🤖 Bᴏᴛ ᴜᴘᴛɪᴍᴇ</b>: {currentTime}"
-    msg += f"\n<b>⌑ 💿 Fʀᴇᴇ ᴅɪsᴋ sᴘᴀᴄᴇ</b>: {get_readable_file_size(disk_usage('/usr/src/app/downloads/').free)}"
-    msg += f"\n<b>⌑ 🚀️ Dᴏᴡɴʟᴏᴀᴅɪɴɢ sᴘᴇᴇᴅ</b>: {get_readable_file_size(dl_speed)}/s"
-    msg += f"\n<b>⌑ 📈️ Uᴘʟᴏᴀᴅɪɴɢ sᴘᴇᴇᴅ</b>: {get_readable_file_size(up_speed)}/s"
+    msg += f"\n<b>⌑ 🤖 ʙᴏᴛ ᴜᴘᴛɪᴍᴇ</b>: {currentTime}"
+    msg += f"\n<b>⌑ 💿 ғʀᴇᴇ ᴅɪsᴋ sᴘᴀᴄᴇ</b>: {get_readable_file_size(disk_usage('/usr/src/app/downloads/').free)}"
+    msg += f"\n<b>⌑ 🚀️ ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ sᴘᴇᴇᴅ</b>: {get_readable_file_size(dl_speed)}/s"
+    msg += f"\n<b>⌑ 📈️ ᴜᴘʟᴏᴀᴅɪɴɢ sᴘᴇᴇᴅ</b>: {get_readable_file_size(up_speed)}/s"
     return msg, button
 
 
