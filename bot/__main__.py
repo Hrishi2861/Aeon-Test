@@ -46,24 +46,24 @@ async def stats(_, message):
     cpuUsage = cpu_percent(interval=0.5)
     quote = Quote.print().split('―', 1)[0].strip().replace("“", "").replace("”", "")
     limit_mapping = {
-        '🧲 Torrent'  : config_dict.get('TORRENT_LIMIT',  '∞'),
-        '🟢 Gdrive'   : config_dict.get('GDRIVE_LIMIT',   '∞'),
-        '🔴 Ytdlp'    : config_dict.get('YTDLP_LIMIT',    '∞'),
-        '🔗 Direct'   : config_dict.get('DIRECT_LIMIT',   '∞'),
-        '🚀 Leech'    : config_dict.get('LEECH_LIMIT',    '∞'),
-        '⚡️ Clone'     : config_dict.get('CLONE_LIMIT',    '∞'),
-        'Ⓜ️ Mega'     : config_dict.get('MEGA_LIMIT',     '∞'),
-        '👤 User task': config_dict.get('USER_MAX_TASKS', '∞')}
+        '🧲 Tᴏʀʀᴇɴᴛ'  : config_dict.get('TORRENT_LIMIT',  '∞'),
+        '🟢 Gᴅʀɪᴠᴇ'   : config_dict.get('GDRIVE_LIMIT',   '∞'),
+        '🔴 Yᴛᴅʟᴘ'    : config_dict.get('YTDLP_LIMIT',    '∞'),
+        '🔗 Dɪʀᴇᴄᴛ'   : config_dict.get('DIRECT_LIMIT',   '∞'),
+        '🚀 Lᴇᴇᴄʜ'    : config_dict.get('LEECH_LIMIT',    '∞'),
+        '⚡️ Cʟᴏɴᴇ'     : config_dict.get('CLONE_LIMIT',    '∞'),
+        'Ⓜ️ Mᴇɢᴀ'     : config_dict.get('MEGA_LIMIT',     '∞'),
+        '👤 Usᴇʀ ᴛᴀsᴋ': config_dict.get('USER_MAX_TASKS', '∞')}
     system_info = f'<b>{quote}</b>\n\n'\
-        f'<code>•🤖 Bot uptime :</code> {currentTime}\n'\
-        f'<code>•🖥️ Sys uptime :</code> {osUptime}\n'\
-        f'<code>•⚡️ CPU usage  :</code> {cpuUsage}%\n'\
-        f'<code>•🧨 RAM usage  :</code> {memory.percent}%\n'\
-        f'<code>•💿 Disk usage :</code> {disk}%\n'\
-        f'<code>•🪫 Free space :</code> {get_readable_file_size(free)}\n'\
-        f'<code>•💯 Total space:</code> {get_readable_file_size(total)}\n\n'\
+        f'🤖 Bᴏᴛ ᴜᴘᴛɪᴍᴇ : {currentTime}\n'\
+        f'🖥️ Sʏs ᴜᴘᴛɪᴍᴇ : {osUptime}\n'\
+        f'⚡️ Cᴘᴜ ᴜsᴀɢᴇ  : {cpuUsage}%\n'\
+        f'🧨 Rᴀᴍ ᴜsᴀɢᴇ  : {memory.percent}%\n'\
+        f'💿 Dɪsᴋ ᴜsᴀɢᴇ : {disk}%\n'\
+        f'🪫 Fʀᴇᴇ sᴘᴀᴄᴇ : {get_readable_file_size(free)}\n'\
+        f'💯 Tᴏᴛᴀʟ sᴘᴀᴄᴇ: {get_readable_file_size(total)}\n\n'\
             
-    limitations = f'<b>LIMITATIONS</b>\n\n'
+    limitations = f'<b>Lɪᴍɪᴛᴀᴛɪᴏɴs</b>\n\n'
     
     for k, v in limit_mapping.items():
         if v == '':
@@ -72,7 +72,7 @@ async def stats(_, message):
             v = f'{v}GB/Link'
         else:
             v = f'{v} Tasks/user'
-        limitations += f'<code>• {k:<11}:</code> {v}\n'
+        limitations += f' {k:<11}: {v}\n'
 
     stats = system_info + limitations
     reply_message = await sendMessage(message, stats, photo='IMAGES')
@@ -157,7 +157,7 @@ async def AeonCallback(_, query):
     user_id = query.from_user.id
     data = query.data.split()
     if user_id != int(data[1]):
-        return await query.answer(text="This message not your's!", show_alert=True)
+        return await query.answer(text="Tʜɪs ᴍᴇssᴀɢᴇ ɪs ɴᴏᴛ ʏᴏᴜʀ's!", show_alert=True)
     elif data[2] == "logdisplay":
         await query.answer()
         async with aiopen('log.txt', 'r') as f:
