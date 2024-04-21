@@ -73,9 +73,9 @@ async def stats(_, message):
             v = f'{v}GB/Link'
         else:
             if v == '1':
-                v = f'{v} task/user'
+                v = f'{v} Task/user'
             else:
-                v = f'{v} tasks/user'
+                v = f'{v} Tasks/user'
         limitations += f' {k:<11}: {v}\n'
 
     stats = system_info + limitations
