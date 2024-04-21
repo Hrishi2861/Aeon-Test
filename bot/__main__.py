@@ -54,7 +54,8 @@ async def stats(_, message):
         '⚡️ Cʟᴏɴᴇ'     : config_dict.get('CLONE_LIMIT',    '∞'),
         'Ⓜ️ Mᴇɢᴀ'     : config_dict.get('MEGA_LIMIT',     '∞'),
         '👤 Usᴇʀ ᴛᴀsᴋ': config_dict.get('USER_MAX_TASKS', '∞')}
-    system_info = f'<b>{quote}</b>\n\n\n'\
+    system_info = f'<b>{quote}</b>\n\n'\
+        f'<b><a href="https://t.me/JetMirror">Pᴏᴡᴇʀᴇᴅ ʙʏ ᴊᴇᴛ-ᴍɪʀʀᴏʀ 🚀♥️</a></b>\n\n'\
         f'<b>Sʏsᴛᴇᴍ sᴛᴀᴛs 🚀♥️</b>\n\n'\
         f'🤖 Bᴏᴛ ᴜᴘᴛɪᴍᴇ : {currentTime}\n'\
         f'🖥️ Sʏs ᴜᴘᴛɪᴍᴇ : {osUptime}\n'\
