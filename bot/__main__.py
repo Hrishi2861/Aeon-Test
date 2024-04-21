@@ -97,14 +97,14 @@ async def start(client, message):
         if DATABASE_URL:
             stored_token = await DbManager().get_user_token(userid)
             if stored_token is None:
-                return await sendMessage(message, '<b>Tʜɪs ᴛᴏᴋᴇɴ ɪs ɴᴏᴛ ғᴏʀ ʏᴏᴜ!!</b>\n\nPʟᴇᴀsᴇ ɢᴇɴᴇʀᴀᴛᴇ ʏᴏᴜʀ ᴏᴡɴ.')
+                return await sendMessage(message, '<b>Tʜɪs ᴛᴏᴋᴇɴ ɪs ɴᴏᴛ ғᴏʀ ʏᴏᴜ!!</b>\n\nKɪɴᴅʟʏ ɢᴇɴᴇʀᴀᴛᴇ ʏᴏᴜʀ ᴏᴡɴ.')
             if input_token != stored_token:
-                return await sendMessage(message, 'Invalid token.\n\nPlease generate a new one.')
+                return await sendMessage(message, '<b>Iɴᴠᴀʟɪᴅ ᴛᴏᴋᴇɴ!!</b>\n\nKɪɴᴅʟʏ ɢᴇɴᴇʀᴀᴛᴇ ʏᴏᴜʀ ᴏᴡɴ.')
         if userid not in user_data:
-            return await sendMessage(message, 'This token is not yours!\n\nKindly generate your own.')
+            return await sendMessage(message, '<b>Tʜɪs ᴛᴏᴋᴇɴ ɪs ɴᴏᴛ ғᴏʀ ʏᴏᴜ!!</b>\n\nKɪɴᴅʟʏ ɢᴇɴᴇʀᴀᴛᴇ ʏᴏᴜʀ ᴏᴡɴ.')
         data = user_data[userid]
         if 'token' not in data or data['token'] != input_token:
-            return await sendMessage(message, '<b>This token has already been used!</b>\n\nPlease get a new one.')
+            return await sendMessage(message, '<b>Tʜɪs ᴛᴏᴋᴇɴ ʜᴀs ᴀʟʀᴇᴀᴅʏ ʙᴇᴇɴ ᴜsᴇᴅ!!</b>\n\nKɪɴᴅʟʏ ɢᴇɴᴇʀᴀᴛᴇ ᴀ ɴᴇᴡ ᴏɴᴇ.')
         token = str(uuid4())
         token_time = time()
         data['token'] = token
@@ -112,8 +112,8 @@ async def start(client, message):
         user_data[userid].update(data)
         if DATABASE_URL:
             await DbManager().update_user_tdata(userid, token, token_time)
-        msg = 'Your token has been successfully generated!\n\n'
-        msg += f'It will be valid for {get_readable_time(int(config_dict["TOKEN_TIMEOUT"]), True)}'
+        msg = '<b>Yᴏᴜʀ ᴛᴏᴋᴇɴ ʜᴀs ʙᴇᴇɴ sᴜᴄᴄᴇssғᴜʟʟʏ ɢᴇɴᴇʀᴀᴛᴇᴅ!</b> 🚀♥️\n\n'
+        msg += f'Iᴛ ᴡɪʟʟ ʙᴇ ᴠᴀʟɪᴅ ғᴏʀ {get_readable_time(int(config_dict["TOKEN_TIMEOUT"]), True)}'
         return await sendMessage(message, msg)
     elif await CustomFilters.authorized(client, message):
         help_command = f"/{BotCommands.HelpCommand}"
