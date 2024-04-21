@@ -157,7 +157,7 @@ def source(self):
 
 
 def get_readable_message():
-    msg = "<b><a href='https://t.me/JetMirror'>Pᴏᴡᴇʀᴇᴅ ʙʏ ᴊᴇᴛ-ᴍɪʀʀᴏʀ 🚀♥️</a></b>\n"
+    msg = "<b><a href='https://t.me/JetMirror'>Pᴏᴡᴇʀᴇᴅ ʙʏ ᴊᴇᴛ-ᴍɪʀʀᴏʀ 🚀♥️</a></b>\n\n"
     button = None
     tasks = len(download_dict)
     currentTime = get_readable_time(time() - botStartTime)
@@ -190,7 +190,7 @@ def get_readable_message():
             msg += f"\nTime: {download.seeding_time()}"
         else:
             msg += f"\nSize: {download.size()}"
-        msg += f"User {download.message.from_user.mention} | Id: <code>{download.message.from_user.id}</code>\n\n"
+        msg += f"\nUser {download.message.from_user.mention} | Id: <code>{download.message.from_user.id}</code>\n\n"
         msg += f"\nElapsed: {get_readable_time(time() - download.message.date.timestamp())}"
         msg += f"\n/stop_{download.gid()[:8]}\n\n"
     if len(msg) == 0:
