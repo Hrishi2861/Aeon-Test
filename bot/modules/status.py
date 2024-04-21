@@ -25,11 +25,10 @@ async def mirror_status(_, message):
 
         msg = f'<b>{quote} ❤️</b>\n\n'
         msg += f"<b><a href='https://t.me/JetMirror'>Pᴏᴡᴇʀᴇᴅ ʙʏ ᴊᴇᴛ-ᴍɪʀʀᴏʀ 🚀♥️</a></b>\n\n"
-        msg += '<b>Uninstall Telegram and enjoy your life!</b>\n\nNo downloads are currently in progress.\n'
-        msg += f"\n<b>•🤖 Bot uptime</b>: {currentTime}"
-        msg += f"\n<b>•💿 Free disk space</b>: {free}"
-        msg += "\n\n<a href='https://t.me/JetMirror'>𝑩𝒐𝒕 𝒃𝒚 🚀 𝑱𝒆𝒕-𝑴𝒊𝒓𝒓𝒐𝒓</a>\n\n"
-
+        msg += '<b>ᴜɴɪɴsᴛᴀʟʟ ᴛᴇʟᴇɢʀᴀᴍ ᴀɴᴅ ᴇɴᴊᴏʏ ʏᴏᴜʀ ʟɪғᴇ!!</b>\n\nɴᴏ ᴅᴏᴡɴʟᴏᴀᴅs ᴀʀᴇ ᴄᴜʀʀᴇɴᴛʟʏ ɪɴ ᴘʀᴏɢʀᴇss.\n'
+        msg += f"\n<b>⌑ ʙᴏᴛ ᴜᴘᴛɪᴍᴇ</b>: {currentTime}"
+        msg += f"\n<b>⌑ ғʀᴇᴇ ᴅɪsᴋ sᴘᴀᴄᴇ</b>: {free}"
+        
         reply_message = await sendMessage(message, msg, photo='IMAGES')
         await deleteMessage(message)
         await one_minute_del(reply_message)
