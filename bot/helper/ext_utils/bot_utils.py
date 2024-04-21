@@ -190,7 +190,7 @@ def get_readable_message():
             msg += f"\nTime: {download.seeding_time()}"
         else:
             msg += f"\nSize: {download.size()}"
-        msg += f"\nUser {download.message.from_user.mention} | Id: <code>{download.message.from_user.id}</code>\n\n"
+        msg += f"\nUser: {download.message.from_user.mention} \nId: <code>{download.message.from_user.id}</code>\n\n"
         msg += f"\nElapsed: {get_readable_time(time() - download.message.date.timestamp())}"
         msg += f"\n/stop_{download.gid()[:8]}\n\n"
     if len(msg) == 0:
