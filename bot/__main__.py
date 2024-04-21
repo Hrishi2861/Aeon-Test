@@ -120,7 +120,7 @@ async def start(client, message):
         start_string = f'This bot can mirror all your links|files|torrents to Google Drive or any rclone cloud or to telegram.\n<b>Type {help_command} to get a list of available commands</b>'
         await sendMessage(message, start_string, photo='IMAGES')
     else:
-        await sendMessage(message, 'Yᴏᴜ Aʀᴇ Nᴏᴛ ᴀ Aᴜᴛʜᴏʀɪᴢᴇᴅ Usᴇʀ!\nYᴏᴜ Cᴀɴ Usᴇ Mᴇ ᴀᴛ <a href="https://telegram.me/JetMirror>ᴊᴇᴛ-ᴍɪʀʀᴏʀ" 🚀♥️</a>', photo='IMAGES')
+        await sendMessage(message, 'Yᴏᴜ Aʀᴇ Nᴏᴛ ᴀ Aᴜᴛʜᴏʀɪᴢᴇᴅ Usᴇʀ!\nYᴏᴜ Cᴀɴ Usᴇ Mᴇ ᴀᴛ <a href="https://telegram.me/JetMirror">ᴊᴇᴛ-ᴍɪʀʀᴏʀ🚀♥️</a>', photo='IMAGES')
     await DbManager().update_pm_users(message.from_user.id)
 
 
