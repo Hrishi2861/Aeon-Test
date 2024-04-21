@@ -97,7 +97,7 @@ async def start(client, message):
         if DATABASE_URL:
             stored_token = await DbManager().get_user_token(userid)
             if stored_token is None:
-                return await sendMessage(message, '<b>This token is not for you!</b>\n\nPlease generate your own.')
+                return await sendMessage(message, '<b>Tʜɪs ᴛᴏᴋᴇɴ ɪs ɴᴏᴛ ғᴏʀ ʏᴏᴜ!!</b>\n\nPʟᴇᴀsᴇ ɢᴇɴᴇʀᴀᴛᴇ ʏᴏᴜʀ ᴏᴡɴ.')
             if input_token != stored_token:
                 return await sendMessage(message, 'Invalid token.\n\nPlease generate a new one.')
         if userid not in user_data:
