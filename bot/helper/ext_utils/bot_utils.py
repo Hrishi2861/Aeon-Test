@@ -171,29 +171,28 @@ def get_readable_message():
         globals()['PAGE_NO'] = PAGES
     for download in list(download_dict.values())[STATUS_START:STATUS_LIMIT+STATUS_START]:
         msg += f"<b>{download.status()}</b>"
-        msg += f"<b>\n⌑ File Name</b> » <i>{escape(f'{download.name()}')}</i>\n"
+        msg += f"<b>\n⌑ ғɪʟᴇɴᴀᴍᴇ</b> » <i>{escape(f'{download.name()}')}</i>\n"
         if download.status() not in [MirrorStatus.STATUS_SPLITTING, MirrorStatus.STATUS_SEEDING]:
             msg += f"\n⌑ {progress_bar(download.progress())} » {download.progress()}"
-            msg += f"\n⌑ Done:      {download.processed_bytes()} of {download.size()}"
-            msg += f"\n⌑ Speed:     {download.speed()}"
-            msg += f'\n⌑ Estimated: {download.eta()}'
-            msg += f"\n⌑ User:      {download.message.from_user.mention} \n"
-            msg += f"\n⌑ Id:        <code>{download.message.from_user.id}</code>\n\n"
+            msg += f"\n⌑ ᴅᴏɴᴇ: {download.processed_bytes()} of {download.size()}"
+            msg += f"\n⌑ sᴘᴇᴇᴅ: {download.speed()}"
+            msg += f'\n⌑ ᴇsᴛɪᴍᴀᴛᴇᴅ: {download.eta()}'
+            msg += f"\n⌑ ᴜsᴇʀ: {download.message.from_user.mention} \n⌑ ɪᴅ: <code>{download.message.from_user.id}</code>\n\n"
             if hasattr(download, 'seeders_num'):
                 try:
-                    msg += f"\n⌑ Seeders: {download.seeders_num()} | Leechers: {download.leechers_num()}"
+                    msg += f"\n⌑ sᴇᴇᴅᴇʀs: {download.seeders_num()} | ʟᴇᴇᴄʜᴇʀs: {download.leechers_num()}"
                 except:
                     pass
         elif download.status() == MirrorStatus.STATUS_SEEDING:
-            msg += f"\n⌑ Size: {download.size()}"
-            msg += f"\n⌑ Speed: {download.upload_speed()}"
-            msg += f"\n⌑ Uploaded: {download.uploaded_bytes()}"
-            msg += f"\n⌑ Ratio: {download.ratio()}"
-            msg += f"\n⌑ Time: {download.seeding_time()}"
+            msg += f"\n⌑ sɪᴢᴇ: {download.size()}"
+            msg += f"\n⌑ sᴘᴇᴇᴅ: {download.upload_speed()}"
+            msg += f"\n⌑ ᴜᴘʟᴏᴀᴅᴇᴅ: {download.uploaded_bytes()}"
+            msg += f"\n⌑ ʀᴀᴛɪᴏ: {download.ratio()}"
+            msg += f"\n⌑ ᴛɪᴍᴇ: {download.seeding_time()}"
         else:
-            msg += f"\n⌑ Size: {download.size()}"
-        msg += f"\n⌑ Elapsed: {get_readable_time(time() - download.message.date.timestamp())}"
-        msg += f"\n⚠️ /stop_{download.gid()[:8]}\n\n"
+            msg += f"\n⌑ sɪᴢᴇ: {download.size()}"
+        msg += f"\n⌑ ᴇʟᴀᴘsᴇᴅ: {get_readable_time(time() - download.message.date.timestamp())}"
+        msg += f"\n⚠️/stop_{download.gid()[:8]}\n\n"
     if len(msg) == 0:
         return None, None
     dl_speed = 0
@@ -208,16 +207,15 @@ def get_readable_message():
                 up_speed += text_to_bytes(download.upload_speed())
     if tasks > STATUS_LIMIT:
         buttons = ButtonMaker()
-        buttons.ibutton("Prev", "status pre")
-        buttons.ibutton(f"{PAGE_NO}/{PAGES}", "status ref")
-        buttons.ibutton("Next", "status nex")
+        buttons.ibutton("Pʀᴇᴠ ➡️", "status pre")
+        buttons.ibutton(f"Rᴇғ 🔄 {PAGE_NO}/{PAGES}", "status ref")
+        buttons.ibutton("⬅️ Nᴇxᴛ", "status nex")
         button = buttons.build_menu(3)
-    msg += f"<b>• Tasks</b>: {tasks}{bmax_task}"
-    msg += f"\n<b>•🤖 Bot uptime</b>: {currentTime}"
-    msg += f"\n<b>•💿 Free disk space</b>: {get_readable_file_size(disk_usage('/usr/src/app/downloads/').free)}"
-    msg += f"\n<b>•🚀️ Uploading speed</b>: {get_readable_file_size(up_speed)}/s"
-    msg += f"\n<b>•📈️ Downloading speed</b>: {get_readable_file_size(dl_speed)}/s"
-    msg += f"\n\n<a href='https://t.me/JetMirror'>𝑩𝒐𝒕 𝒃𝒚 🚀 𝑱𝒆𝒕-𝑴𝒊𝒓𝒓𝒐𝒓</a>"
+    msg += f"<b>⌑ Tᴀsᴋs</b>: {tasks}{bmax_task}"
+    msg += f"\n<b>⌑ 🤖 Bᴏᴛ ᴜᴘᴛɪᴍᴇ</b>: {currentTime}"
+    msg += f"\n<b>⌑ 💿 Fʀᴇᴇ ᴅɪsᴋ sᴘᴀᴄᴇ</b>: {get_readable_file_size(disk_usage('/usr/src/app/downloads/').free)}"
+    msg += f"\n<b>⌑ 🚀️ Dᴏᴡɴʟᴏᴀᴅɪɴɢ sᴘᴇᴇᴅ</b>: {get_readable_file_size(dl_speed)}/s"
+    msg += f"\n<b>⌑ 📈️ Uᴘʟᴏᴀᴅɪɴɢ sᴘᴇᴇᴅ</b>: {get_readable_file_size(up_speed)}/s"
     return msg, button
 
 
