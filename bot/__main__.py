@@ -69,7 +69,7 @@ async def stats(_, message):
     for k, v in limit_mapping.items():
         if v == '':
             v = '∞'
-        elif k != 'User task':
+        elif k != '👤 Usᴇʀ ᴛᴀsᴋ':
             v = f'{v}GB/Link'
         else:
             v = f'{v} Tasks/user'
