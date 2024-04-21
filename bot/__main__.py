@@ -72,10 +72,10 @@ async def stats(_, message):
         elif k != '👤 Usᴇʀ ᴛᴀsᴋ':
             v = f'{v}GB/Link'
         else:
-            if v == '1':
-                v = f'{v} task/user'
+            if v == '2':
+                v = f'{v} Task/user'
             else:
-                v = f'{v} tasks/user'
+                v = f'{v} Tasks/user'
 
     stats = system_info + limitations
     reply_message = await sendMessage(message, stats, photo='IMAGES')
