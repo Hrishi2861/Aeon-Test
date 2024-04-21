@@ -54,7 +54,8 @@ async def stats(_, message):
         '⚡️ Cʟᴏɴᴇ'     : config_dict.get('CLONE_LIMIT',    '∞'),
         'Ⓜ️ Mᴇɢᴀ'     : config_dict.get('MEGA_LIMIT',     '∞'),
         '👤 Usᴇʀ ᴛᴀsᴋ': config_dict.get('USER_MAX_TASKS', '∞')}
-    system_info = f'<b>{quote}</b>\n\n'\
+    system_info = f'<b>{quote}</b>\n\n\n'\
+        f'<b>Sʏsᴛᴇᴍ sᴛᴀᴛs 🚀♥️</b>\n\n'\
         f'🤖 Bᴏᴛ ᴜᴘᴛɪᴍᴇ : {currentTime}\n'\
         f'🖥️ Sʏs ᴜᴘᴛɪᴍᴇ : {osUptime}\n'\
         f'⚡️ Cᴘᴜ ᴜsᴀɢᴇ  : {cpuUsage}%\n'\
@@ -63,7 +64,7 @@ async def stats(_, message):
         f'🪫 Fʀᴇᴇ sᴘᴀᴄᴇ : {get_readable_file_size(free)}\n'\
         f'💯 Tᴏᴛᴀʟ sᴘᴀᴄᴇ: {get_readable_file_size(total)}\n\n'\
             
-    limitations = f'<b>Lɪᴍɪᴛᴀᴛɪᴏɴs</b>\n\n'
+    limitations = f'<b>Lɪᴍɪᴛᴀᴛɪᴏɴs 🚀♥️</b>\n\n'
     
     for k, v in limit_mapping.items():
         if v == '':
