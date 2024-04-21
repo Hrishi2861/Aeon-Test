@@ -217,7 +217,7 @@ async def _mirror_leech(client, message, isQbit=False, isLeech=False, sameDir=No
     error_msg = []
     error_button = None
     if await nsfw_precheck(message):
-    	  error_msg.extend(['NSFW detected'])
+    	  error_msg.extend(['<b>Iʟʟᴇɢᴀʟ ғɪʟᴇs ᴅᴇᴛᴇᴄᴛᴇᴅ!!</b>\nGᴏ ғᴜᴄᴋ ʏᴏᴜʀsᴇʟғ ʏᴏᴜ ᴊᴇʀᴋ 🤬.'])
     task_utilis_msg, error_button = await task_utils(message)
     if task_utilis_msg:
         error_msg.extend(task_utilis_msg)
