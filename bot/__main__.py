@@ -72,7 +72,7 @@ async def stats(_, message):
         elif k != '👤 Usᴇʀ ᴛᴀsᴋ':
             v = f'{v}GB/Link'
         else:
-            if v == '1':
+            if v == 1:
                 v = f'{v} Task/user'
             else:
                 v = f'{v} Tasks/user'
