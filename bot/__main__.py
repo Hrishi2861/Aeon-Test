@@ -71,6 +71,8 @@ async def stats(_, message):
             v = '∞'
         elif k != 'User task':
             v = f'{v}GB/Link'
+        elif k == '👤 Usᴇʀ ᴛᴀsᴋ':
+            v = f'{v} Tasks/user'
         else:
             v = f'{v} Tasks/user'
         limitations += f' {k:<11}: {v}\n'
