@@ -212,10 +212,10 @@ def get_readable_message():
         buttons.ibutton("⬅️ ɴᴇxᴛ", "status nex")
         button = buttons.build_menu(3)
     msg += f"<b>⌑ Tᴀsᴋs</b>: {tasks}{bmax_task}"
-    msg += f"\n<b>⌑ 🤖 ʙᴏᴛ ᴜᴘᴛɪᴍᴇ</b>: {currentTime}"
-    msg += f"\n<b>⌑ 💿 ғʀᴇᴇ ᴅɪsᴋ sᴘᴀᴄᴇ</b>: {get_readable_file_size(disk_usage('/usr/src/app/downloads/').free)}"
-    msg += f"\n<b>⌑ 🚀️ ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ sᴘᴇᴇᴅ</b>: {get_readable_file_size(dl_speed)}/s"
-    msg += f"\n<b>⌑ 📈️ ᴜᴘʟᴏᴀᴅɪɴɢ sᴘᴇᴇᴅ</b>: {get_readable_file_size(up_speed)}/s"
+    msg += f"\n<b>⌑ ʙᴏᴛ ᴜᴘᴛɪᴍᴇ</b>: {currentTime}"
+    msg += f"\n<b>⌑ ғʀᴇᴇ ᴅɪsᴋ sᴘᴀᴄᴇ</b>: {get_readable_file_size(disk_usage('/usr/src/app/downloads/').free)}"
+    msg += f"\n<b>⌑ ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ sᴘᴇᴇᴅ</b>: {get_readable_file_size(dl_speed)}/s"
+    msg += f"\n<b>⌑ ᴜᴘʟᴏᴀᴅɪɴɢ sᴘᴇᴇᴅ</b>: {get_readable_file_size(up_speed)}/s"
     return msg, button
 
 
