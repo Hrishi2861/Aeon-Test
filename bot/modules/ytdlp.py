@@ -6,7 +6,7 @@ from aiofiles.os import path as aiopath
 from yt_dlp import YoutubeDL
 from functools import partial
 from time import time
-
+import asyncio
 from bot import bot, config_dict, user_data, LOGGER
 from bot.helper.ext_utils.task_manager import task_utils
 from bot.helper.telegram_helper.message_utils import sendMessage, editMessage, delete_links, deleteMessage, one_minute_del, five_minute_del, isAdmin
@@ -241,6 +241,9 @@ async def _mdisk(link, name):
 
 @new_task
 async def _ytdl(client, message, isLeech=False, sameDir=None, bulk=[]):
+    sticker_message = await message.reply_sticker("CAACAgEAAxkBAAEZd1RmJiS0v9Spb2wvNhBp612LpVboHwACfAQAAsWmoEceFoDzX5nHNzQE")
+    await asyncio.sleep(2)
+    await sticker_message.delete()
     text        = message.text.split('\n')
     input_list  = text[0].split(' ')
     qual        = ''
