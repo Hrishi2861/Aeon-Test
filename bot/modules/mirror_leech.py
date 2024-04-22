@@ -32,7 +32,7 @@ from bot.helper.ext_utils.aeon_utils import nsfw_precheck
 
 @new_task
 async def _mirror_leech(client, message, isQbit=False, isLeech=False, sameDir=None, bulk=[]):
-    sticker_message = await message.reply_sticker("CAACAgIAAxkBAAEXyPRledQ6luKt1QABSPMPi2s4rgH3xMUAAmkdAALpI4hJ8xCGgSybQv8zBA")
+    sticker_message = await message.reply_sticker("CAACAgUAAxkBAAEZdx5mJhT9pCwLp94Kh19c6VwWtSWYNQAC5AQAAi51CFWx4vp0ZASxejQE")
     await asyncio.sleep(2)
     await sticker_message.delete()
     text         = message.text.split('\n')
