@@ -33,7 +33,7 @@ from bot.helper.ext_utils.db_handler import DbManager
 
 
 class MirrorLeechListener:
-    def __init__(self, message, compress=False, extract=False, isQbit=False, isLeech=False, tag=None, select=False, seed=False, sameDir=None, rcFlags=None, upPath=None, isClone=False, join=False, isYtdlp=False, drive_id=None, index_link=None, leech_utils={}, source_url=None):
+    def __init__(self, message, compress=False, extract=False, isQbit=False, isLeech=False, tag=None, select=False, seed=False, sameDir=None, rcFlags=None, upPath=None, isClone=False, join=False, isYtdlp=False, drive_id=None, index_link=None, leech_utils={}):
         if sameDir is None:
             sameDir = {}
         self.message = message
@@ -62,14 +62,6 @@ class MirrorLeechListener:
         self.drive_id = drive_id
         self.index_link = index_link
         self.leech_utils = leech_utils
-        self.source_url = (
-            source_url
-            if source_url and source_url.startswith('http')
-            else f"https://t.me/share/url?url={source_url}"
-            if source_url
-            else message.link
-        )
-        self.source_msg = ''
 
     async def clean(self):
         try:
@@ -87,7 +79,7 @@ class MirrorLeechListener:
             msg = f'<b>Task Started</b>\n\n'
             msg += f'<b>• Task by:</b> {self.tag}\n'
             msg += f'<b>• User ID: </b><code>{self.message.from_user.id}</code>\n'
-            msg += f'<b>• Source Link: </b>{self.source_msg}'
+            #msg += f'<b>• Source Link: </b>{self.source_msg}'
             self.linkslogmsg = await sendCustomMsg(config_dict['LEECH_LOG_ID'], msg)
         user_dict = user_data.get(self.message.from_user.id, {})
         self.botpmmsg = await sendCustomMsg(self.message.from_user.id, '<b>Task started</b>')
@@ -320,7 +312,7 @@ class MirrorLeechListener:
             size = await get_path_size(up_dir)
             for s in m_size:
                 size = size - s
-            LOGGER.info(f"Leech Name: {up_name}")
+            LOGGER.info(f"ʟᴇᴇᴄʜ ɴᴀᴍᴇ: {up_name}")
             tg = TgUploader(up_name, up_dir, self)
             tg_upload_status = TelegramStatus(
                 tg, size, self.message, gid, 'up')
@@ -330,7 +322,7 @@ class MirrorLeechListener:
             await tg.upload(o_files, m_size, size)
         elif self.upPath == 'gd':
             size = await get_path_size(up_path)
-            LOGGER.info(f"Upload Name: {up_name}")
+            LOGGER.info(f"ᴜᴘʟᴏᴀᴅ ɴᴀᴍᴇ: {up_name}")
             drive = GoogleDriveHelper(up_name, up_dir, self)
             upload_status = GdriveStatus(drive, size, self.message, gid, 'up')
             async with download_dict_lock:
@@ -339,7 +331,7 @@ class MirrorLeechListener:
             await sync_to_async(drive.upload, up_name, size, self.drive_id)
         else:
             size = await get_path_size(up_path)
-            LOGGER.info(f"Upload Name: {up_name} via RClone")
+            LOGGER.info(f"ᴜᴘʟᴏᴀᴅ ɴᴀᴍᴇ: {up_name} via RClone")
             RCTransfer = RcloneTransferHelper(self, up_name)
             async with download_dict_lock:
                 download_dict[self.uid] = RcloneStatus(
@@ -352,28 +344,28 @@ class MirrorLeechListener:
         name, _ = await format_filename(name, user_id, isMirror=not self.isLeech)
         user_dict = user_data.get(user_id, {})
         msg = f'{escape(name)}\n\n'
-        msg += f'<b>• Size: </b>{get_readable_file_size(size)}\n'
-        msg += f'<b>• Elapsed: </b>{get_readable_time(time() - self.message.date.timestamp())}\n'
-        LOGGER.info(f'Task Done: {name}')
+        msg += f'<b>⌑ sɪᴢᴇ: </b>{get_readable_file_size(size)}\n'
+        msg += f'<b>⌑ ᴇʟᴀᴘsᴇᴅ: </b>{get_readable_time(time() - self.message.date.timestamp())}\n'
+        LOGGER.info(f'ᴛᴀsᴋ ᴅᴏɴᴇ: {name}')
         buttons = ButtonMaker()
         iButton = ButtonMaker()
-        iButton.ibutton('View in inbox', f"aeon {user_id} botpm", 'header')
+        iButton.ibutton('Vɪᴇᴡ ɪɴ ɪɴʙᴏx', f"aeon {user_id} botpm", 'header')
         iButton = extra_btns(iButton)
         if self.isLeech:
             if folders > 1:
-                msg += f'<b>• Total files: </b>{folders}\n'
+                msg += f'<b>⌑ ᴛᴏᴛᴀʟ ғɪʟᴇs: </b>{folders}\n'
             if mime_type != 0:
-                msg += f'<b>• Corrupted files: </b>{mime_type}\n'
-            msg += f'<b>• Uploaded by: </b>{self.tag}\n'
-            msg += f'<b>• User ID: </b><code>{self.message.from_user.id}</code>\n\n'
+                msg += f'<b>⌑ ᴄᴏʀʀᴜᴘᴛᴇᴅ ғɪʟᴇs: </b>{mime_type}\n'
+            msg += f'<b>⌑ ᴜᴘʟᴏᴀᴅᴇᴅ ʙʏ: </b>{self.tag}\n'
+            msg += f'<b>⌑ ᴜsᴇʀ ɪᴅ: </b><code>{self.message.from_user.id}</code>\n\n'
             if not files:
                 if self.isPrivate:
-                    msg += '<b>Files have not been sent for an unspecified reason</b>'
+                    msg += '<b>ғɪʟᴇs ʜᴀᴠᴇ ɴᴏᴛ ʙᴇᴇɴ sᴇɴᴛ ғᴏʀ ᴀɴ ᴜɴsᴘᴇᴄɪғɪᴇᴅ ʀᴇᴀsᴏɴ.</b>'
                 await sendMessage(self.message, msg)
             else:
                 attachmsg = True
                 fmsg, totalmsg = '\n\n', ''
-                lmsg = '<b>Files have been sent. Access them via the provided links.</b>'
+                lmsg = '<b>ғɪʟᴇs ʜᴀᴠᴇ ʙᴇᴇɴ sᴇɴᴛ. ᴀᴄᴇss ᴛʜᴇᴍ ᴠɪᴀ ᴛʜᴇ ᴘʀᴏᴠɪᴅᴇᴅ ʟɪɴᴋs.</b>'
                 for index, (link, name) in enumerate(files.items(), start=1):
                     fmsg += f"{index}. <a href='{link}'>{name}</a>\n"
                     totalmsg = (msg + lmsg + fmsg) if attachmsg else fmsg
@@ -392,7 +384,7 @@ class MirrorLeechListener:
                 await sendMessage(self.botpmmsg, msg + lmsg + fmsg)
                 await deleteMessage(self.botpmmsg)
                 if self.isSuperGroup:
-                    await sendMessage(self.message, f'{msg}<b>Files has been sent to your inbox</b>', iButton.build_menu(1))
+                    await sendMessage(self.message, f'{msg}<b>ғɪʟᴇs ʜᴀs ʙᴇᴇɴ sᴇɴᴛ ᴛᴏ ʏᴏᴜʀ ɪɴʙᴏx.</b>', iButton.build_menu(1))
                 else:
                     await deleteMessage(self.botpmmsg)
             if self.seed:
@@ -404,27 +396,27 @@ class MirrorLeechListener:
                 await start_from_queued()
                 return
         else:
-            if mime_type == "Folder":
-                msg += f'<b>• Total files: </b>{files}\n'
+            if mime_type == "ғᴏʟᴅᴇʀ":
+                msg += f'<b>⌑ ᴛᴏᴛᴀʟ ғɪʟᴇs: </b>{files}\n'
             if link:
-                buttons.ubutton('Cloud link', link)
+                buttons.ubutton('☁️ ᴄʟᴏᴜᴅ ʟɪɴᴋ', link)
                 INDEX_URL = self.index_link if self.drive_id else config_dict['INDEX_URL']
                 if not rclonePath:
                     if INDEX_URL:
                         url_path = rutils.quote(f'{name}')
                         share_url = f'{INDEX_URL}/{url_path}'
-                        if mime_type == "Folder":
+                        if mime_type == "ғᴏʟᴅᴇʀ":
                             share_url += '/'
-                        buttons.ubutton('Index link', share_url)
+                        buttons.ubutton('⚡️ ɪɴᴅᴇx ʟɪɴᴋ', share_url)
                 buttons = extra_btns(buttons)
                 button = buttons.build_menu(2)
             elif rclonePath:
-                msg += f'<b>• Path: </b><code>{rclonePath}</code>\n'
+                msg += f'<b>⌑ ᴘᴀᴛʜ: </b><code>{rclonePath}</code>\n'
                 button = None
                 buttons = extra_btns(buttons)
                 button = buttons.build_menu(2)
-            msg += f'<b>• Uploaded by: </b>{self.tag}\n'
-            msg += f'<b>• User ID: </b><code>{self.message.from_user.id}</code>\n\n'
+            msg += f'<b>⌑ ᴜᴘʟᴏᴀᴅᴇᴅ ʙʏ: </b>{self.tag}\n'
+            msg += f'<b>⌑ ᴜsᴇʀ ɪᴅ: </b><code>{self.message.from_user.id}</code>\n\n'
 
             if config_dict['MIRROR_LOG_ID']:
                 log_msg = list((await sendMultiMessage(config_dict['MIRROR_LOG_ID'], msg, button)).values())[0]
@@ -433,7 +425,7 @@ class MirrorLeechListener:
             await sendMessage(self.botpmmsg, msg, button, self.random_pic)
             await deleteMessage(self.botpmmsg)
             if self.isSuperGroup:
-                await sendMessage(self.message, f'{msg} <b>Links has been sent to your inbox</b>', iButton.build_menu(1))
+                await sendMessage(self.message, f'{msg} <b>ʟɪɴᴋs ʜᴀs ʙᴇᴇɴ sᴇɴᴛ ᴛᴏ ʏᴏᴜʀ ɪɴʙᴏx</b>', iButton.build_menu(1))
             else:
                 await deleteMessage(self.botpmmsg)
             if self.seed:
@@ -472,10 +464,10 @@ class MirrorLeechListener:
             if self.sameDir and self.uid in self.sameDir['tasks']:
                 self.sameDir['tasks'].remove(self.uid)
                 self.sameDir['total'] -= 1
-        msg = f'Hey, {self.tag}!\n'
-        msg += 'Your download has been stopped!\n\n'
-        msg += f'<b>Reason:</b> {escape(error)}\n'
-        msg += f'<b>Elapsed:</b> {get_readable_time(time() - self.message.date.timestamp())}'
+        msg = f'ʜᴇʏ, {self.tag}!\n'
+        msg += 'ʏᴏᴜʀ ᴅᴏᴡɴʟᴏᴀᴅ ʜᴀs ʙᴇᴇɴ sᴛᴏᴘᴘᴇᴅ!\n\n'
+        msg += f'<b>ʀᴇᴀsᴏɴ:</b> {escape(error)}\n'
+        msg += f'<b>ᴇʟᴀᴘsᴇᴅ:</b> {get_readable_time(time() - self.message.date.timestamp())}'
         x = await sendMessage(self.message, msg, button)
         await delete_links(self.message)
         if self.botpmmsg:
@@ -513,10 +505,10 @@ class MirrorLeechListener:
             if self.uid in download_dict.keys():
                 del download_dict[self.uid]
             count = len(download_dict)
-        msg = f'Hey, {self.tag}!\n'
-        msg += 'Your upload has been stopped!\n\n'
-        msg += f'<b>Reason:</b> {escape(error)}\n'
-        msg += f'<b>Elapsed:</b> {get_readable_time(time() - self.message.date.timestamp())}'
+        msg = f'ʜᴇʏ, {self.tag}!\n'
+        msg += 'ʏᴏᴜʀ ᴜᴘʟᴏᴀᴅ ʜᴀs ʙᴇᴇɴ sᴛᴏᴘᴘᴇᴅ!\n\n'
+        msg += f'<b>ʀᴇᴀsᴏɴ:</b> {escape(error)}\n'
+        msg += f'<b>ᴇʟᴀᴘsᴇᴅ:</b> {get_readable_time(time() - self.message.date.timestamp())}'
         x = await sendMessage(self.message, msg)
         if self.linkslogmsg:
             await deleteMessage(self.linkslogmsg)
