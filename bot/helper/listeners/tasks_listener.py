@@ -343,7 +343,8 @@ class MirrorLeechListener:
         user_id = self.message.from_user.id
         name, _ = await format_filename(name, user_id, isMirror=not self.isLeech)
         user_dict = user_data.get(user_id, {})
-        msg = f'{escape(name)}\n\n'
+        sticker_message = await msg.reply_sticker("CAACAgIAAxkBAAEXzJtlezBU92o9SmsFleHxnuyQWpkHnQACogEAAjDUnRH1ZwABIuJAFVczBA")
+        msg += f'{escape(name)}\n\n'
         msg += f'<b>⌑ sɪᴢᴇ: </b>{get_readable_file_size(size)}\n'
         msg += f'<b>⌑ ᴇʟᴀᴘsᴇᴅ: </b>{get_readable_time(time() - self.message.date.timestamp())}\n'
         LOGGER.info(f'ᴛᴀsᴋ ᴅᴏɴᴇ: {name}')
@@ -505,6 +506,7 @@ class MirrorLeechListener:
             if self.uid in download_dict.keys():
                 del download_dict[self.uid]
             count = len(download_dict)
+        sticker_message = await msg.reply_sticker("CAACAgIAAxkBAAEXzJtlezBU92o9SmsFleHxnuyQWpkHnQACogEAAjDUnRH1ZwABIuJAFVczBA")
         msg = f'ʜᴇʏ, {self.tag}!\n'
         msg += 'ʏᴏᴜʀ ᴜᴘʟᴏᴀᴅ ʜᴀs ʙᴇᴇɴ sᴛᴏᴘᴘᴇᴅ!\n\n'
         msg += f'<b>ʀᴇᴀsᴏɴ:</b> {escape(error)}\n'
