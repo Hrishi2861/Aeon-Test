@@ -303,16 +303,16 @@ async def edit_user_settings(client, query):
     elif data[2] == 'show_tds':
         handler_dict[user_id] = False
         user_tds = user_dict.get('user_tds', {})
-        msg = f'<b><u>User TD Details</u></b>\n\n'
+        msg = f'<b><u>ᴜsᴇʀ ᴛᴅ ᴅᴇᴛᴀɪʟs</u></b>\n\n'
         for index_no, (drive_name, drive_dict) in enumerate(user_tds.items(), start=1):
-            msg += f'{index_no}: <b>Name:</b> <code>{drive_name}</code>\n'
-            msg += f"  <b>Drive ID:</b> <code>{drive_dict['drive_id']}</code>\n"
-            msg += f"  <b>Index Link:</b> <code>{ind_url if (ind_url := drive_dict['index_link']) else 'Not Provided'}</code>\n\n"
+            msg += f'{index_no}: <b>ɴᴀᴍᴇ:</b> <code>{drive_name}</code>\n'
+            msg += f"  <b>ᴅʀɪᴠᴇ ɪᴅ:</b> <code>{drive_dict['drive_id']}</code>\n"
+            msg += f"  <b>ɪɴᴅᴇx ʟɪɴᴋ:</b> <code>{ind_url if (ind_url := drive_dict['index_link']) else 'Not Provided'}</code>\n\n"
         try:
             await sendCustomMsg(user_id, msg)
-            await query.answer('User TDs Successfully Send in your PM', show_alert=True)
+            await query.answer('ᴜsᴇʀ ᴛᴅ sᴜᴄᴄᴇssғᴜʟʟʏ sᴇɴᴅ ɪɴ ʏᴏᴜʀ ᴘᴍ', show_alert=True)
         except:
-            await query.answer('Start the Bot in PM (Private) and Try Again', show_alert=True)
+            await query.answer('sᴛᴀʀᴛ ᴛʜᴇ ʙᴏᴛ ɪɴ ᴘᴍ(ᴘʀɪᴠᴀᴛᴇ) ᴀɴᴅ ᴛʀʏ ᴀɢᴀɪɴ', show_alert=True)
         await update_user_settings(query, 'user_tds', 'mirror')
     elif data[2] == "dthumb":
         handler_dict[user_id] = False
@@ -324,7 +324,7 @@ async def edit_user_settings(client, query):
             if DATABASE_URL:
                 await DbManager().update_user_doc(user_id, 'thumb')
         else:
-            await query.answer("Old Settings", show_alert=True)
+            await query.answer("ᴏʟᴅ sᴇᴛᴛɪɴɢs", show_alert=True)
             await update_user_settings(query, 'leech')
     elif data[2] == 'thumb':
         await query.answer()
@@ -352,7 +352,7 @@ async def edit_user_settings(client, query):
     elif data[2] == 'td_mode':
         handler_dict[user_id] = False
         if data[2] == 'td_mode' and not user_dict.get('user_tds', False):
-            return await query.answer("Set UserTD first to Enable User TD Mode !", show_alert=True)
+            return await query.answer("sᴇᴛ ᴜsᴇʀᴛᴅ ғɪʀsᴛ ᴛᴏ ᴇɴᴀʙʟᴇ ᴜsᴇʀ ᴛᴅ ᴍᴏᴅᴇ!!", show_alert=True)
         await query.answer()
         update_user_ldata(user_id, data[2], not user_dict.get(data[2], False))
         await update_user_settings(query, 'user_tds', 'mirror')
@@ -361,7 +361,7 @@ async def edit_user_settings(client, query):
     elif data[2] == 'mediainfo':
         handler_dict[user_id] = False
         if config_dict['SHOW_MEDIAINFO']:
-            return await query.answer("Force Enabled! Can't Alter Settings", show_alert=True)
+            return await query.answer("ғᴏʀᴄᴇ ᴇɴᴀʙʟᴇᴅ! ᴄᴀɴ'ᴛ ᴀʟᴛᴇʀ sᴇᴛᴛɪɴɢs", show_alert=True)
         await query.answer()
         update_user_ldata(user_id, data[2], not user_dict.get(data[2], False))
         await update_user_settings(query, 'leech')
@@ -392,7 +392,7 @@ async def edit_user_settings(client, query):
             if DATABASE_URL:
                 await DbManager().update_user_doc(user_id, 'rclone')
         else:
-            await query.answer("Old Settings", show_alert=True)
+            await query.answer("ᴏʟᴅ sᴇᴛᴛɪɴɢs", show_alert=True)
             await update_user_settings(query)
     elif data[2] == 'user_tds':
         handler_dict[user_id] = False
@@ -453,10 +453,10 @@ async def edit_user_settings(client, query):
         handler_dict[user_id] = False
         await query.answer()
         buttons = ButtonMaker()
-        buttons.ibutton('Yes', f"userset {user_id} reset_now y")
-        buttons.ibutton('No', f"userset {user_id} reset_now n")
-        buttons.ibutton("Close", f"userset {user_id} close", "footer")
-        await editMessage(message, 'Do you want to Reset Settings ?', buttons.build_menu(2))
+        buttons.ibutton('ʏᴇs 🫡', f"userset {user_id} reset_now y")
+        buttons.ibutton('ɴᴏ 🙅‍♂️', f"userset {user_id} reset_now n")
+        buttons.ibutton("❌", f"userset {user_id} close", "footer")
+        await editMessage(message, 'ᴅᴏ ʏᴏᴜ ᴡᴀɴᴛ ᴛᴏ ʀᴇsᴇᴛ sᴇᴛᴛɪɴɢ¿', buttons.build_menu(2))
     elif data[2] == 'reset_now':
         handler_dict[user_id] = False
         if data[3] == 'n':
@@ -486,7 +486,7 @@ async def edit_user_settings(client, query):
             await DbManager().update_user_data(user_id)
             await DbManager().update_user_doc(user_id, 'thumb')
             await DbManager().update_user_doc(user_id, 'rclone')
-        await editMessage(message, f'Data Reset for {user_id}')
+        await editMessage(message, f'ᴅᴀᴛᴀ ʀᴇsᴇᴛ ғᴏʀ {user_id}')
     else:
         handler_dict[user_id] = False
         await query.answer()
@@ -507,9 +507,9 @@ async def send_users_settings(client, message):
     elif (reply_to := message.reply_to_message) and reply_to.from_user and not reply_to.from_user.is_bot:
         userid = reply_to.from_user.id
     if not userid:
-        msg = f'<u><b>Total Users / Chats Data Saved :</b> {len(user_data)}</u>'
+        msg = f'<u><b>ᴛᴏᴛᴀʟ ᴜsᴇʀs / ᴄʜᴀᴛs ᴅᴀᴛᴀ sᴀᴠᴇᴅ:</b> {len(user_data)}</u>'
         buttons = ButtonMaker()
-        buttons.ibutton("Close", f"userset {message.from_user.id} close")
+        buttons.ibutton("❌", f"userset {message.from_user.id} close")
         button = buttons.build_menu(1)
         for user, data in user_data.items():
             msg += f'\n\n<code>{user}</code>:'
@@ -530,19 +530,19 @@ async def send_users_settings(client, message):
         msg = f'{await getUserInfo(client, userid)} ( <code>{userid}</code> ):'
         if data := user_data[int(userid)]:
             buttons = ButtonMaker()
-            buttons.ibutton("Delete Data", f"userset {message.from_user.id} user_del {userid}")
-            buttons.ibutton("Close", f"userset {message.from_user.id} close")
+            buttons.ibutton("ᴅᴇʟᴇᴛᴇ ᴅᴀᴛᴀ 🗑", f"userset {message.from_user.id} user_del {userid}")
+            buttons.ibutton("❌", f"userset {message.from_user.id} close")
             button = buttons.build_menu(1)
             for key, value in data.items():
                 if key in ['token', 'time']:
                     continue
                 msg += f'\n<b>{key}</b>: <code>{escape(str(value))}</code>'
         else:
-            msg += '\nThis User has not Saved anything.'
+            msg += '\nᴛʜɪs ᴜsᴇʀ ʜᴀs ɴᴏᴛ sᴀᴠᴇᴅ ᴀɴʏᴛʜɪɴɢ..!'
             button = None
         await sendMessage(message, msg, button)
     else:
-        await sendMessage(message, f'{userid} have not saved anything..')
+        await sendMessage(message, f'{userid} ʜᴀᴠᴇ ɴᴏᴛ sᴀᴠᴇᴅ ᴀɴʏᴛʜɪɴɢ..!')
 
 
 bot.add_handler(MessageHandler(send_users_settings, filters=command(
