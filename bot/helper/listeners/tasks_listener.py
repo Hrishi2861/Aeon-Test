@@ -69,6 +69,7 @@ class MirrorLeechListener:
             if source_url
             else message.link
         )
+        self.source_msg = ''
 
     async def clean(self):
         try:
@@ -86,7 +87,7 @@ class MirrorLeechListener:
             msg = f'<b>Task Started</b>\n\n'
             msg += f'<b>• Task by:</b> {self.tag}\n'
             msg += f'<b>• User ID: </b><code>{self.message.from_user.id}</code>\n'
-            msg += f'<b>• Source Link: </b> {self.source_msg}'
+            msg += f'<b>• Source Link: </b> {self.source_url}{self.source_msg}'
             self.linkslogmsg = await sendCustomMsg(config_dict['LEECH_LOG_ID'], msg)
         user_dict = user_data.get(self.message.from_user.id, {})
         self.botpmmsg = await sendCustomMsg(self.message.from_user.id, '<b>Task started</b>')
