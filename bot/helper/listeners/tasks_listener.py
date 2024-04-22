@@ -466,7 +466,7 @@ class MirrorLeechListener:
             if self.sameDir and self.uid in self.sameDir['tasks']:
                 self.sameDir['tasks'].remove(self.uid)
                 self.sameDir['total'] -= 1
-        await self.message.reply_sticker("CAACAgIAAxkBAAEZdwZmJhDzZLn6wIkBCPaCJBWS3kXoKgAC4AUAAj-VzAphywSm9A28rDQE")
+        await self.message.reply_sticker("CAACAgUAAxkBAAEZdxRmJhSGaHTpbHXmny9aPbKz9gfqvQACOA0AAmtQOVRDTwRcAyjd3DQE")
         await asyncio.sleep(2)
         msg = f'ʜᴇʏ, {self.tag}!\n'
         msg += 'ʏᴏᴜʀ ᴅᴏᴡɴʟᴏᴀᴅ ʜᴀs ʙᴇᴇɴ sᴛᴏᴘᴘᴇᴅ!\n\n'
