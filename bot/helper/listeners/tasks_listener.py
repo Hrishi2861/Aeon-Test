@@ -342,7 +342,7 @@ class MirrorLeechListener:
     async def onUploadComplete(self, link, size, files, folders, mime_type, name, rclonePath=''):
         user_id = self.message.from_user.id
         await self.message.reply_sticker("CAACAgIAAxkBAAEZdwRmJhCNfFRnXwR_lVKU1L9F3qzbtAAC4gUAAj-VzApzZV-v3phk4DQE")
-        await asyncio.sleep(1)
+        await asyncio.sleep(2)
         name, _ = await format_filename(name, user_id, isMirror=not self.isLeech)
         user_dict = user_data.get(user_id, {})
         msg = f'{escape(name)}\n\n'
@@ -467,7 +467,7 @@ class MirrorLeechListener:
                 self.sameDir['tasks'].remove(self.uid)
                 self.sameDir['total'] -= 1
         await self.message.reply_sticker("CAACAgIAAxkBAAEZdwZmJhDzZLn6wIkBCPaCJBWS3kXoKgAC4AUAAj-VzAphywSm9A28rDQE")
-        await asyncio.sleep(1)
+        await asyncio.sleep(2)
         msg = f'ʜᴇʏ, {self.tag}!\n'
         msg += 'ʏᴏᴜʀ ᴅᴏᴡɴʟᴏᴀᴅ ʜᴀs ʙᴇᴇɴ sᴛᴏᴘᴘᴇᴅ!\n\n'
         msg += f'<b>ʀᴇᴀsᴏɴ:</b> {escape(error)}\n'
@@ -510,7 +510,7 @@ class MirrorLeechListener:
                 del download_dict[self.uid]
             count = len(download_dict)
         await self.message.reply_sticker("CAACAgUAAxkBAAEZdwhmJhEtVHB_D4aTXr0aSehAiTmPMwACTQQAAgIW2FSpfUijSfRJzzQE")
-        await asyncio.sleep(1)
+        await asyncio.sleep(2)
         msg = f'ʜᴇʏ, {self.tag}!\n'
         msg += 'ʏᴏᴜʀ ᴜᴘʟᴏᴀᴅ ʜᴀs ʙᴇᴇɴ sᴛᴏᴘᴘᴇᴅ!\n\n'
         msg += f'<b>ʀᴇᴀsᴏɴ:</b> {escape(error)}\n'
