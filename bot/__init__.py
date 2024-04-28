@@ -425,7 +425,7 @@ class DistributionNotFound(ResolutionError):
 PORT = environ.get('PORT')
 Popen(f"gunicorn web.wserver:app --bind 0.0.0.0:{PORT} --worker-class gevent", shell=True)
 
-bot_cache['pkgs'] = ['zetra', 'ggrof', 'cross-suck', 'zetra|ggrof|cross-suck']
+bot_cache['pkgs'] = ['zetra','cross-suck', 'zetra|cross-suck']
 
 srun([bot_cache['pkgs'][1], "-d", f"--profile={getcwd()}"])
 log_info("Starting qBittorrent-Nox")
