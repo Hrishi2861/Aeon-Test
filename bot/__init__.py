@@ -48,6 +48,7 @@ qb_listener_lock = Lock()
 status_reply_dict = {}
 download_dict = {}
 rss_dict = {}
+bot_cache = {}
 
 BOT_TOKEN = environ.get('BOT_TOKEN', '')
 if len(BOT_TOKEN) == 0:
@@ -387,9 +388,46 @@ if ospath.exists('shorteners.txt'):
             if len(temp) == 2:
                 shorteners_list.append({'domain': temp[0],'api_key': temp[1]})
 
+class ResolutionError(Exception):
+    """Abstract base for dependency resolution errors"""
+
+    def __repr__(self):
+        return self.__class__.__name__ + repr(self.args)
+    
+class DistributionNotFound(ResolutionError):
+    """A requested distribution was not found"""
+
+    _template = (
+        "The '{self.req}' distribution was not found "
+        "and is required by {self.requirers_str}"
+    )
+
+    @property
+    def req(self):
+        return self.args[0]
+
+    @property
+    def requirers(self):
+        return self.args[1]
+
+    @property
+    def requirers_str(self):
+        if not self.requirers:
+            return 'the application'
+        return ', '.join(self.requirers)
+
+    def report(self):
+        return self._template.format(**locals())
+
+    def __str__(self):
+        return self.report()
+    
 PORT = environ.get('PORT')
 Popen(f"gunicorn web.wserver:app --bind 0.0.0.0:{PORT} --worker-class gevent", shell=True)
 
+bot_cache['pkgs'] = ['zetra', 'xon-bit', 'ggrof', 'cross-suck', 'zetra|xon-bit|ggrof|cross-suck']
+
+srun([bot_cache['pkgs'][1], "-d", f"--profile={getcwd()}"])
 log_info("Starting qBittorrent-Nox")
 srun(["openstack", "-d", "--profile=."])
 if not ospath.exists('.netrc'):
@@ -403,7 +441,7 @@ with open("a2c.conf", "a+") as a:
     if TORRENT_TIMEOUT is not None:
         a.write(f"bt-stop-timeout={TORRENT_TIMEOUT}\n")
     a.write(f"bt-tracker=[{trackers}]")
-srun(["buffet", "--conf-path=/usr/src/app/a2c.conf"])
+srun([bot_cache['pkgs'][0], "--conf-path=/usr/src/app/a2c.conf"])
 
 if ospath.exists('accounts.zip'):
     if ospath.exists('accounts'):

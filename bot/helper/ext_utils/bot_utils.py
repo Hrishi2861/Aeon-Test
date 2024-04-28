@@ -22,6 +22,7 @@ from mega import MegaApi
 from pyrogram.enums import ChatType
 from pyrogram.types import BotCommand
 from pyrogram.errors import PeerIdInvalid
+from bot import bot_cache, DistributionNotFound
 
 from bot.helper.ext_utils.db_handler import DbManager
 from bot import OWNER_ID, bot_name, DATABASE_URL, LOGGER, get_client, aria2, download_dict, download_dict_lock, botStartTime, user_data, config_dict, bot_loop, extra_buttons, user
@@ -53,6 +54,55 @@ class MirrorStatus:
     STATUS_CHECKING = "CheckUp"
     STATUS_SEEDING = "Seeding"
 
+def get_all_versions():
+    try:
+        result = srun(['7z', '-version'], capture_output=True, text=True)
+        vp = result.stdout.split('\n')[2].split(' ')[2]
+    except FileNotFoundError:
+        vp = ''
+    try:
+        result = srun([bot_cache['pkgs'][2], '-version'], capture_output=True, text=True)
+        vf = result.stdout.split('\n')[0].split(' ')[2].split('ubuntu')[0]
+    except FileNotFoundError:
+        vf = ''
+    try:
+        result = srun([bot_cache['pkgs'][3], 'version'], capture_output=True, text=True)
+        vr = result.stdout.split('\n')[0].split(' ')[1]
+    except FileNotFoundError:
+        vr = ''
+    try:
+        vpy = get_distribution('pyrogram').version
+    except DistributionNotFound:
+        try:
+            vpy = get_distribution('pyrofork').version
+        except DistributionNotFound:
+            vpy = "2.xx.xx"
+    bot_cache['eng_versions'] = {'p7zip':vp, 'ffmpeg': vf, 'rclone': vr,
+                                    'aria': aria2.client.get_version()['version'],
+                                    'aiohttp': get_distribution('aiohttp').version,
+                                    'gapi': get_distribution('google-api-python-client').version,
+                                    'mega': MegaApi('test').getVersion(),
+                                    'qbit': get_client().app.version,
+                                    'pyro': vpy,
+                                    'ytdlp': get_distribution('yt-dlp').version}
+    
+class EngineStatus:
+    def __init__(self):
+        if not (version_cache := bot_cache.get('eng_versions')):
+            get_all_versions()
+            version_cache = bot_cache.get('eng_versions')
+        self.STATUS_ARIA = f"Aria2 v{version_cache['aria']}"
+        self.STATUS_AIOHTTP = f"AioHttp {version_cache['aiohttp']}"
+        self.STATUS_GD = f"Google-API v{version_cache['gapi']}"
+        self.STATUS_MEGA = f"MegaSDK v{version_cache['mega']}"
+        self.STATUS_QB = f"qBit {version_cache['qbit']}"
+        self.STATUS_TG = f"PyroMulti v{version_cache['pyro']}"
+        self.STATUS_YT = f"yt-dlp v{version_cache['ytdlp']}"
+        self.STATUS_EXT = "pExtract v2"
+        self.STATUS_SPLIT_MERGE = f"ffmpeg v{version_cache['ffmpeg']}"
+        self.STATUS_ZIP = f"p7zip v{version_cache['p7zip']}"
+        self.STATUS_QUEUE = "Sleep v0"
+        self.STATUS_RCLONE = f"RClone {version_cache['rclone']}"
 
 class setInterval:
     def __init__(self, interval, action):
@@ -178,6 +228,7 @@ def get_readable_message():
             msg += f"\n⌑ sᴘᴇᴇᴅ: {download.speed()}"
             msg += f'\n⌑ ᴇsᴛɪᴍᴀᴛᴇᴅ: {download.eta()}'
             msg += f"\n⌑ ᴜsᴇʀ: {download.message.from_user.mention} \n⌑ ɪᴅ: <code>{download.message.from_user.id}</code>\n"
+            msg += f"⌑ ᴇɴɢɪɴᴇ: {download.engine}\n"
             if hasattr(download, 'seeders_num'):
                 try:
                     msg += f"⌑ sᴇᴇᴅᴇʀs: {download.seeders_num()} | ʟᴇᴇᴄʜᴇʀs: {download.leechers_num()}"
