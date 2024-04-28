@@ -228,7 +228,7 @@ def get_readable_message():
             msg += f"\n⌑ sᴘᴇᴇᴅ: {download.speed()}"
             msg += f'\n⌑ ᴇsᴛɪᴍᴀᴛᴇᴅ: {download.eta()}'
             msg += f"\n⌑ ᴜsᴇʀ: {download.message.from_user.mention} \n⌑ ɪᴅ: <code>{download.message.from_user.id}</code>\n"
-            msg += f"⌑ ᴇɴɢɪɴᴇ: {download.engine}\n"
+            msg += f"⌑ ᴇɴɢɪɴᴇ: {download.eng}\n"
             if hasattr(download, 'seeders_num'):
                 try:
                     msg += f"⌑ sᴇᴇᴅᴇʀs: {download.seeders_num()} | ʟᴇᴇᴄʜᴇʀs: {download.leechers_num()}"
