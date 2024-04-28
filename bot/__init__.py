@@ -427,7 +427,7 @@ Popen(f"gunicorn web.wserver:app --bind 0.0.0.0:{PORT} --worker-class gevent", s
 
 #bot_cache['pkgs'] = ['zetra']
 
-srun([bot_cache['pkgs'][1], "-d", f"--profile={getcwd()}"])
+#srun([bot_cache['pkgs'][1], "-d", f"--profile={getcwd()}"])
 log_info("Starting qBittorrent-Nox")
 srun(["openstack", "-d", "--profile=."])
 if not ospath.exists('.netrc'):
