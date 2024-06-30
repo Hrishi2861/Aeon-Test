@@ -425,6 +425,9 @@ class DistributionNotFound(ResolutionError):
 PORT = environ.get('PORT')
 Popen(f"gunicorn web.wserver:app --bind 0.0.0.0:{PORT} --worker-class gevent", shell=True)
 
+def get_client():
+    return qbClient(host="localhost", port=8090, VERIFY_WEBUI_CERTIFICATE=False, REQUESTS_ARGS={'timeout': (30, 60)})
+
 srun(["xnox", "-d", "--profile=."])
 if not ospath.exists('.netrc'):
     with open('.netrc', 'w'):
